@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="开源和闭源是软件开发中相互对立的发布方式，开源意味着源代码公开，闭源则封闭源代码。对应到PC操作系统，Linux是开源的，Windows则是闭源的。不同的发布方式，影响软件的开发模式。Eric S. Raymond在《大教堂与集市》（The Cathedral and the Bazaar）一书中讲述了开源文化，对比了软件开发的大教堂模式与集市模式，以及对开源潮流的展望。 Linux的成功之路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件开源与闭源，如何选择？-读《大教堂与集市》有感">
+<meta property="og:url" content="https://jandu.me/2017/09/14/2017-09-14/index.html">
+<meta property="og:site_name" content="Jan Du">
+<meta property="og:description" content="开源和闭源是软件开发中相互对立的发布方式，开源意味着源代码公开，闭源则封闭源代码。对应到PC操作系统，Linux是开源的，Windows则是闭源的。不同的发布方式，影响软件的开发模式。Eric S. Raymond在《大教堂与集市》（The Cathedral and the Bazaar）一书中讲述了开源文化，对比了软件开发的大教堂模式与集市模式，以及对开源潮流的展望。 Linux的成功之路">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-12T02:21:53.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件开源与闭源，如何选择？-读《大教堂与集市》有感">
+<meta name="twitter:description" content="开源和闭源是软件开发中相互对立的发布方式，开源意味着源代码公开，闭源则封闭源代码。对应到PC操作系统，Linux是开源的，Windows则是闭源的。不同的发布方式，影响软件的开发模式。Eric S. Raymond在《大教堂与集市》（The Cathedral and the Bazaar）一书中讲述了开源文化，对比了软件开发的大教堂模式与集市模式，以及对开源潮流的展望。 Linux的成功之路">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>软件开源与闭源，如何选择？-读《大教堂与集市》有感 | Jan Du</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jan Du</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">诗酒趁年华</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jandu.me/2017/09/14/2017-09-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jan Du">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jan Du">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件开源与闭源，如何选择？-读《大教堂与集市》有感</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-14T00:00:00+08:00">
+                2017-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Book-Review/" itemprop="url" rel="index">
+                    <span itemprop="name">Book Review</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/14/2017-09-14/" class="leancloud_visitors" data-flag-title="软件开源与闭源，如何选择？-读《大教堂与集市》有感">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　开源和闭源是软件开发中相互对立的发布方式，开源意味着源代码公开，闭源则封闭源代码。对应到PC操作系统，Linux是开源的，Windows则是闭源的。不同的发布方式，影响软件的开发模式。Eric S. Raymond在《大教堂与集市》（The Cathedral and the Bazaar）一书中讲述了开源文化，对比了软件开发的大教堂模式与集市模式，以及对开源潮流的展望。</p>
+<h3 id="Linux的成功之路"><a href="#Linux的成功之路" class="headerlink" title="Linux的成功之路"></a>Linux的成功之路</h3><p>　　1991年，还是一名大学学生的Linus Torvalds开始为386机器开发自由UNIX<sup>(1)</sup>内核。Linus很快获得了成功并吸引了互联网上的黑客们，他们帮助Linus一同开发Linux：一个全功能的UNIX，源代码完全免费，而且可以再发布。<br>　　在Linux被开发出来之前，所有人都认为，如果软件复杂到操作系统这样的程度，就必须要有一个精心协作的团队，团队要比较小，而且紧密互动。而Linux更像是仅通过互联网合作的大量志愿者的随意之作，没有严格的标准也没有一个强有力的机构来管理质量，他们只是执行一个简单得有点幼稚的策略：每周发布，并在接下来几天内获取数百个用户的反馈。<br>　　1993年年底，Linux在稳定性和可靠性上已经和很多商业UNIX不相上下，并能支持比商业UNIX要多得多的软件。<br>　　如今，世界上500个最快的超级计算机90％以上运行Linux发行版或变种，包括最快的前10名超级电脑运行的都是基于Linux内核的操作系统。Linux也广泛应用在嵌入式系统上，如手机、平板电脑、路由器、电视和电子游戏机等。在移动设备上广泛使用的Android操作系统就是创建在Linux内核之上。</p>
+<h3 id="大教堂模式与集市模式"><a href="#大教堂模式与集市模式" class="headerlink" title="大教堂模式与集市模式"></a>大教堂模式与集市模式</h3><p>　　大教堂是封闭式建筑，秩序井然、安静虔诚；集市是开放式建筑，混乱嘈杂。作者以大教堂和集市比喻当时绝大多数商业公司采用的开发模式和Linux的开发模式，是因为两种软件开发模式的根本不同点在于对软件排错的完全对立的认识。前者由公司雇员负责纠错，后者则由几千名散布在全球各地的开发者，利用业余时间通过互联网合作来纠错。<br>　　作者认为Linus最聪明和最有价值的成就其实不是构建出一个Linux内核，而是他发明的这种Linux开发模式。Linus的快速发布和利用互联网杠杆效应便是他慧眼发现的最省力的开发途径。Linus在持续不断地激励和回报着他的黑客/用户，用自我满足感激励他们，用持续改进（甚至每天都有改进）回报他们。</p>
+<blockquote>
+<p>如果有足够多的beta测试者和合作开发者 ，几乎所有问题都会很快显现 ，然后自然有人会把它解决 。</p>
+</blockquote>
+<p>　　这道出了大教堂模式和集市模式最关键的区别：在大教堂建筑者看来，bug是棘手的、难以发现的，要经过几个人较长时间的仔细检查才能修正。而发布间隔越长，倘若等待已久的发布版本并不完美，人们的失望就越发不可避免。对集市模式而言则完全不同，在上千名合作开发者热切钻研每个新发布版本的情况下，你可以假定bug是易发现的，或者至少很快变得易发现。所以你会频繁发布以获取更多的修正，其副作用是良性的：即便发布中有些小问题，你也不会损失太多。<br>　　作者提出了集市模式成功的必要条件，我总结了以下几点：</p>
+<ol>
+<li>开发社区从成立起，就需要一个可运行和测试的原始项目。</li>
+<li>要做出承诺，让潜在合作开发者相信，这个软件未来的潜力。</li>
+<li>项目领导人必须要有高度的设计直觉和聪明才智，能识别出别人的优秀创意。</li>
+<li>项目的协调人必须有很好的人际交往和沟通能力。</li>
+</ol>
+<h3 id="软件开源与闭源，如何选择"><a href="#软件开源与闭源，如何选择" class="headerlink" title="软件开源与闭源，如何选择"></a>软件开源与闭源，如何选择</h3><p>　　计算机程序像其他所有类型的工具或生产资料一样 ，有着两种不同的经济价值 ：使用价值和销售价值 。程序的使用价值是它作为一个工具 、一个生产率提升工具的经济价值 ；程序的销售价值是它作为一个可买卖商品的价值。<br>　　作者认为软件很大程度上是一个服务行业 ，虽然长期以来都毫无根据地被错认为是制造行业 。未来软件产业的经济关键是服务价值，消费者愿意支付的价格不会超过对供应商服务的未来预期价值。<br>　　开源软件不仅在技术上，而且也在经济上挑战着现有秩序。将软件免费所带来的效果，看来会强制我们进入以服务费为主导的世界，并让我们清楚了解，闭源软件一直以来依靠软件销售价值的做法是多么脆弱 。<br>　　作者总结了5个选择开源的理由，一个软件是否需要开源，可以参考这些方面：</p>
+<ol>
+<li>可靠性/稳定性/可扩展性非常重要。 </li>
+<li>除了独立的同行评审，没有其他便捷易行的方法验证设计和实现的正确性。 </li>
+<li>该软件对客户的业务非常关键。 </li>
+<li>该软件创建或运转一个公共计算或通信基础架构。 </li>
+<li>关键方法（或能实现同等功能的方法 ）属于公共知识。</li>
+</ol>
+<p>　　限于篇幅原因，书中涉及黑客文化的部分将下次分享。</p>
+<hr>
+<p>(1): UNIX，是一个强大的多用户、多任务操作系统，支持多种处理器架构，按照操作系统的分类，属于分时操作系统，最早由KenThompson、Dennis Ritchie和Douglas McIlroy于1969年在AT&amp;T的贝尔实验室开发。–来自<a href="https://zh.wikipedia.org/wiki/UNIX" target="_blank" rel="noopener">维基百科</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/07/2017-09-07/" rel="next" title="参加时间管理技巧课程有感">
+                <i class="fa fa-chevron-left"></i> 参加时间管理技巧课程有感
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/21/浅谈黑客/" rel="prev" title="浅谈黑客">
+                浅谈黑客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81MDA3OS8yNjU2OQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jan Du</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux的成功之路"><span class="nav-text">Linux的成功之路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大教堂模式与集市模式"><span class="nav-text">大教堂模式与集市模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件开源与闭源，如何选择"><span class="nav-text">软件开源与闭源，如何选择</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jan Du</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("GEIk0FT7nBGb55xUB8UrdgKE-gzGzoHsz", "SXAf5IQ7tHl2kapowXwnBD19");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
